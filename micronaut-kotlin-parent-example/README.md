@@ -1,7 +1,7 @@
 # Micronaut Maven Kotlin parent - Example
 
 This project try to be a simple but complete example of use of 
-[micronaut-kotlin-parent](https://github.com/autentia/micronaut-kotlin-parent).
+[micronaut-kotlin-parent](https://github.com/archimedes-projects/archimedes-maven-micronaut/tree/main/micronaut-kotlin-parent).
 
 In this example you can find:
 
@@ -19,4 +19,3 @@ mvn clean install
 ```
  
  Please check the source code, specially the different `pom.xml`, to see how all things are easily configured.
- 
