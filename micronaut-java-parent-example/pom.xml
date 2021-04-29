@@ -17,6 +17,7 @@
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Java parent example.</description>
+    <url>https://www.archimedesfw.io/</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -24,6 +25,12 @@
             <distribution>manual</distribution>
         </license>
     </licenses>
+    <scm>
+        <connection>scm:git:git://github.com/archimedes-projects/archimedes-maven-micronaut-examples.git</connection>
+        <developerConnection>scm:git:ssh://github.com:archimedes-projects/archimedes-maven-micronaut-examples.git</developerConnection>
+        <tag>main</tag>
+        <url>https://github.com/archimedes-projects/archimedes-maven-micronaut-examples</url>
+    </scm>
     <developers>
         <developer>
             <id>alejandropg</id>
