@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @MicronautTest
-class JdbcTodoRepositoryIT {
+class TodoRepositoryIT {
 
     @Inject
     private TodoRepository todoRepository;
@@ -45,14 +45,10 @@ class JdbcTodoRepositoryIT {
 
     @Test
     void find_by_id() {
-        final var todo = todoRepository.findBy(2);
+        final var todo = todoRepository.findById(2).orElseThrow();
 
         assertEquals(
-                new Todo(2,
-                        "Ride a helicopter",
-                        LocalDateTime.parse("2017-10-21T14:42:57"),
-                        null
-                ),
+                new Todo(2, "Ride a helicopter", LocalDateTime.parse("2017-10-21T14:42:57"), null),
                 todo
         );
     }

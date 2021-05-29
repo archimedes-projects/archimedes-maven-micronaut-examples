@@ -1,4 +1,4 @@
-package io.archimedesfw.maven.micronaut.example.todo.persistence.jdbc
+package io.archimedesfw.maven.micronaut.example.todo.persistence
 
 import io.archimedesfw.maven.micronaut.example.todo.Todo
 import io.archimedesfw.maven.micronaut.example.todo.persistence.TodoRepository
@@ -11,7 +11,7 @@ import java.time.LocalDateTime
 import org.junit.jupiter.api.Assertions.assertEquals
 
 @MicronautTest
-internal class JdbcTodoRepositoryIT {
+internal class TodoRepositoryIT {
 
     @Inject
     private lateinit var todoRepository: TodoRepository
@@ -46,7 +46,7 @@ internal class JdbcTodoRepositoryIT {
 
     @Test
     internal fun find_by_id() {
-        val actual = todoRepository.findBy(2)
+        val actual = todoRepository.findById(2).orElseThrow()
 
         assertEquals(
             Todo(2, "Ride a helicopter", LocalDateTime.parse("2017-10-21T14:42:57")),

@@ -1,13 +1,12 @@
 package io.archimedesfw.maven.micronaut.example.todo.persistence;
 
 import io.archimedesfw.maven.micronaut.example.todo.Todo;
+import io.micronaut.data.jdbc.annotation.JdbcRepository;
+import io.micronaut.data.repository.CrudRepository;
 
-import java.util.List;
+import static io.micronaut.data.model.query.builder.sql.Dialect.POSTGRES;
 
-public interface TodoRepository {
-
-    List<Todo> findAll();
-
-    Todo findBy(int id);
+@JdbcRepository(dialect = POSTGRES)
+public interface TodoRepository extends CrudRepository<Todo, Integer> {
 
 }
