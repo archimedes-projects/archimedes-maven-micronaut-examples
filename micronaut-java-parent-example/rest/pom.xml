@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.archimedesfw.maven.micronaut.example</groupId>
         <artifactId>micronaut-java-parent-example</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
 
     <artifactId>micronaut-java-parent-example-rest</artifactId>
