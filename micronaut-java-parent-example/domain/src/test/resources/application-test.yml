@@ -11,4 +11,3 @@ datasources:
 flyway:
   datasources:
     default:
-      locations: classpath:db/migration

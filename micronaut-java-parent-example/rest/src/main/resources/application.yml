@@ -5,7 +5,6 @@ micronaut:
   security:
     enabled: false
 
-
 jackson:
   serialization:
     writeDatesAsTimestamps: false
@@ -31,4 +30,3 @@ datasources:
 flyway:
   datasources:
     default:
-      locations: classpath:db/migration
