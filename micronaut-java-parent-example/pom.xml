@@ -7,7 +7,7 @@
     <parent>
         <groupId>io.archimedesfw.maven.micronaut</groupId>
         <artifactId>micronaut-java-parent</artifactId>
-        <version>2.5.4</version>
+        <version>3.0.0</version>
     </parent>
 
     <groupId>io.archimedesfw.maven.micronaut.example</groupId>
@@ -41,7 +41,7 @@
     <properties>
         <postgresql.version>42.2.20</postgresql.version>
 
-        <docker-maven-plugin.version>0.36.0</docker-maven-plugin.version>
+        <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
     </properties>
 
     <modules>
@@ -62,7 +62,6 @@
         </pluginManagement>
 
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -71,11 +70,11 @@
                     <annotationProcessorPaths combine.children="append">
                         <!-- Parent project provides just the basic annotation processors (inject-java and validation),
                         so **append** the specific ones that you need in your project: data, security... -->
-                        <annotationProcessorPath>
+                        <path>
                             <groupId>io.micronaut.data</groupId>
                             <artifactId>micronaut-data-processor</artifactId>
                             <version>${micronaut.data.version}</version>
-                        </annotationProcessorPath>
+                        </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
@@ -104,6 +103,12 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
         </dependency>
 
         <!-- Add the Micronaut dependencies you want to use -->

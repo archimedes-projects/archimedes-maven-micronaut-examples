@@ -1,14 +1,11 @@
 package io.archimedesfw.maven.micronaut.example.todo.persistence
 
 import io.archimedesfw.maven.micronaut.example.todo.Todo
-import io.archimedesfw.maven.micronaut.example.todo.persistence.TodoRepository
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
-import org.junit.jupiter.api.Test
-
-import javax.inject.Inject
-import java.time.LocalDateTime
-
+import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
 
 @MicronautTest
 internal class TodoRepositoryIT {
