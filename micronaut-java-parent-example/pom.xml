@@ -100,15 +100,10 @@
 
     <dependencies>
         <!-- The annotation processor is preconfigured in micronaut-java-parent so you only need to add this dependency  -->
+        <!-- WARNING! Check the file 'lombok.config' that is also needed -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
         </dependency>
 
         <!-- Add the Micronaut dependencies you want to use -->
