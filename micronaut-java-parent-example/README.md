@@ -10,7 +10,7 @@ In this example you can find:
  - Integration with Spring transaction manager and JdbcTemplate, and use of `@Transaction`.
  - Use dockerized PostgreSQL to run integration tests.
  - Ability to run application from Maven command line (`mvn -pl rest exec:exec`).
- - Ability to dockerize de application with [Jib](https://github.com/GoogleContainerTools/jib) (`mvn -pl rest jib:dockerBuild`)
+ - Ability to dockerize the application with [Jib](https://github.com/GoogleContainerTools/jib) (`mvn -pl rest jib:dockerBuild`)
  
  To build (compile, test, package, integration tests...) the complete project you can run in the root project directory:
  
