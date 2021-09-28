@@ -7,37 +7,13 @@
     <parent>
         <groupId>io.archimedesfw.maven.micronaut</groupId>
         <artifactId>micronaut-kotlin-parent</artifactId>
-        <version>3.0.1</version>
+        <version>3.0.2</version>
     </parent>
 
     <groupId>io.archimedesfw.maven.micronaut.example</groupId>
     <artifactId>micronaut-kotlin-parent-example</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>
-
-    <name>${project.groupId}:${project.artifactId}</name>
-    <description>Kotlin parent example.</description>
-    <url>https://www.archimedesfw.io/</url>
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>manual</distribution>
-        </license>
-    </licenses>
-    <scm>
-        <connection>scm:git:git://github.com/archimedes-projects/archimedes-maven-micronaut-examples.git</connection>
-        <developerConnection>scm:git:ssh://github.com:archimedes-projects/archimedes-maven-micronaut-examples.git
-        </developerConnection>
-        <tag>main</tag>
-        <url>https://github.com/archimedes-projects/archimedes-maven-micronaut-examples</url>
-    </scm>
-    <developers>
-        <developer>
-            <id>alejandropg</id>
-            <name>Alejandro Pérez</name>
-        </developer>
-    </developers>
 
     <properties>
         <postgresql.version>42.2.20</postgresql.version>
@@ -49,43 +25,6 @@
         <module>domain</module>
         <module>rest</module>
     </modules>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <!-- We will use in domain module to run a dockerized PostgreSQL for integration tests -->
-                    <groupId>io.fabric8</groupId>
-                    <artifactId>docker-maven-plugin</artifactId>
-                    <version>${docker-maven-plugin.version}</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
-        <plugins>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <configuration>
-                    <annotationProcessorPaths combine.children="append">
-                        <!-- Parent project provides just the basic annotation processors (inject-java and validation),
-                        so **append** the specific ones that you need in your project: data, security... -->
-                        <annotationProcessorPath>
-                            <groupId>io.micronaut.data</groupId>
-                            <artifactId>micronaut-data-processor</artifactId>
-                            <version>${micronaut.data.version}</version>
-                        </annotationProcessorPath>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-            <plugin>
-                <!-- Activate integration tests -->
-                <!-- This plugin is preconfigured in micronaut-base-parent so you only need to declare it -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
     <dependencyManagement>
         <dependencies>
@@ -144,5 +83,51 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <!-- We will use in domain module to run a dockerized PostgreSQL for integration tests -->
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <!-- Activate integration tests -->
+                <!-- This plugin is preconfigured in micronaut-base-parent so you only need to declare it -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Kotlin parent example.</description>
+    <url>https://www.archimedesfw.io/</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>manual</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git://github.com/archimedes-projects/archimedes-maven-micronaut-examples.git</connection>
+        <developerConnection>scm:git:ssh://github.com:archimedes-projects/archimedes-maven-micronaut-examples.git
+        </developerConnection>
+        <tag>main</tag>
+        <url>https://github.com/archimedes-projects/archimedes-maven-micronaut-examples</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>alejandropg</id>
+            <name>Alejandro Pérez</name>
+        </developer>
+    </developers>
 
 </project>
