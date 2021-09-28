@@ -15,35 +15,6 @@
         <exec.mainClass>io.archimedesfw.maven.micronaut.example.todo.Application</exec.mainClass>
     </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <!-- Activate the ability to run module from Maven in the command lines with: -->
-                <!--     mvn exec:exec -->
-                <!-- Remember the database have to be available before to run (see domain module to run ddbb manually) -->
-                <!-- This plugin is preconfigured in micronaut-java-parent so you only need to declare it -->
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <!-- Activate the ability to generate a Docker image with command: -->
-                <!--     mvn jib:dockerBuild -->
-                <!-- This plugin is preconfigured in micronaut-java-parent so you only need to declare it -->
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <configuration>
-                    <to>
-                        <image>micronaut-java-parent-example-rest</image>
-                        <tags>
-                            <tag>${project.version}</tag>
-                        </tags>
-                    </to>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -83,5 +54,34 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- Activate the ability to run module from Maven in the command lines with: -->
+                <!--     mvn exec:exec -->
+                <!-- Remember the database have to be available before to run (see domain module to run ddbb manually) -->
+                <!-- This plugin is preconfigured in micronaut-java-parent so you only need to declare it -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <!-- Activate the ability to generate a Docker image with command: -->
+                <!--     mvn jib:dockerBuild -->
+                <!-- This plugin is preconfigured in micronaut-java-parent so you only need to declare it -->
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <configuration>
+                    <to>
+                        <image>micronaut-java-parent-example-rest</image>
+                        <tags>
+                            <tag>${project.version}</tag>
+                        </tags>
+                    </to>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
