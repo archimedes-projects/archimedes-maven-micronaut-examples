@@ -18,7 +18,7 @@
     <properties>
         <postgresql.version>42.2.20</postgresql.version>
 
-        <docker-maven-plugin.version>0.38.0</docker-maven-plugin.version>
+        <docker-maven-plugin.version>0.38.1</docker-maven-plugin.version>
     </properties>
 
     <modules>
