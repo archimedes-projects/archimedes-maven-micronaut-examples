@@ -106,7 +106,7 @@
         </plugins>
     </build>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Kotlin parent example.</description>
     <url>https://www.archimedesfw.io/</url>
     <licenses>
