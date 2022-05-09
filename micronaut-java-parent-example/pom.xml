@@ -7,7 +7,7 @@
     <parent>
         <groupId>io.archimedesfw.maven.micronaut</groupId>
         <artifactId>micronaut-java-parent</artifactId>
-        <version>3.4.0</version>
+        <version>3.4.3</version>
     </parent>
 
     <groupId>io.archimedesfw.maven.micronaut.example</groupId>
@@ -16,8 +16,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <postgresql.version>42.3.3</postgresql.version>
-
         <docker-maven-plugin.version>0.39.1</docker-maven-plugin.version>
     </properties>
 
@@ -25,17 +23,6 @@
         <module>domain</module>
         <module>rest</module>
     </modules>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${postgresql.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <!-- The annotation processor is preconfigured in micronaut-java-parent so you only need to add this dependency  -->
