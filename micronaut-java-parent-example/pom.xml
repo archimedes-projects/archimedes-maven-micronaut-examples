@@ -7,7 +7,7 @@
     <parent>
         <groupId>io.archimedesfw.maven.micronaut</groupId>
         <artifactId>micronaut-java-parent</artifactId>
-        <version>3.4.3</version>
+        <version>3.5.3</version>
     </parent>
 
     <groupId>io.archimedesfw.maven.micronaut.example</groupId>
@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <docker-maven-plugin.version>0.39.1</docker-maven-plugin.version>
+        <docker-maven-plugin.version>0.40.1</docker-maven-plugin.version>
     </properties>
 
     <modules>
