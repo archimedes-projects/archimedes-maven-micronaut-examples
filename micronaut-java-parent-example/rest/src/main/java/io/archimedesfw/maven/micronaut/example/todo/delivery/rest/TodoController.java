@@ -5,10 +5,10 @@ import io.archimedesfw.maven.micronaut.example.todo.Todo;
 import io.archimedesfw.maven.micronaut.example.todo.persistence.TodoRepository;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.transaction.Transactional;
 
 @Controller("/todos")
 class TodoController {

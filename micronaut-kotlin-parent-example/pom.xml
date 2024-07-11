@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- The micronaut-java-parent module preconfigure all the version and plugins, so you only need to add it as your parent! -->
+    <!-- The micronaut-java-parent module preconfigures all the version and plugins, so you only need to add it as your parent! -->
     <parent>
         <groupId>io.archimedesfw.maven.micronaut</groupId>
         <artifactId>micronaut-kotlin-parent</artifactId>
-        <version>3.7.4</version>
+        <version>4.5.0</version>
     </parent>
 
     <groupId>io.archimedesfw.maven.micronaut.example</groupId>
@@ -16,7 +16,12 @@
     <packaging>pom</packaging>
 
     <properties>
-        <docker-maven-plugin.version>0.40.2</docker-maven-plugin.version>
+        <packaging>docker</packaging> <!-- Micronaut will create a Docker image to run the application -->
+
+        <!-- Use Micronaut TestResources during test execution!!! -->
+        <!-- This facilitates automatically starting the necessary test containers for integration tests.
+             For example, to run a dockerized PostgreSQL instance, etc. -->
+        <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
     </properties>
 
     <modules>
@@ -26,17 +31,23 @@
 
     <dependencies>
         <!-- Add the Micronaut dependencies you want to use -->
-        <!-- Do not worry about versions, they are preconfigured in micronaut-java-parent that uses the official Micronaut BOM -->
+        <!-- Do not worry about versions, they are preconfigured in micronaut-kotlin-parent that uses the official Micronaut BOM -->
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-runtime</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.micronaut</groupId>
+            <groupId>io.micronaut.validation</groupId>
             <artifactId>micronaut-validation</artifactId>
         </dependency>
 
-        <!-- Logging system is already integrated with Micronaut so only need to add the dependency to use it -->
+        <!-- Use Micronaut Serialization instead of Jackson library -->
+        <dependency>
+            <groupId>io.micronaut.serde</groupId>
+            <artifactId>micronaut-serde-jackson</artifactId>
+        </dependency>
+
+        <!-- Logging system is already integrated with Micronaut, so only need to add the dependency to use it -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -69,24 +80,46 @@
             <artifactId>micronaut-test-junit5</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Use Micronaut Test Resources for managing external resources which are required during development or testing.
+             For example, to run a dockerized PostgreSQL for integration tests -->
+        <dependency>
+            <groupId>io.micronaut.testresources</groupId>
+            <artifactId>micronaut-test-resources-client</artifactId>
+            <scope>provided</scope> <!-- This allows you to use Micronaut Test Resources when mvn mn:run -->
+        </dependency>
     </dependencies>
 
     <build>
         <pluginManagement>
             <plugins>
+                <!-- This configuration is typically unnecessary because TestResources automagically infers the
+                     required containers based on your dependencies. However, it can be useful in multi-module projects
+                     to ensure all modules can run the correct containers independently of their dependencies. -->
                 <plugin>
-                    <!-- We will use in domain module to run a dockerized PostgreSQL for integration tests -->
-                    <groupId>io.fabric8</groupId>
-                    <artifactId>docker-maven-plugin</artifactId>
-                    <version>${docker-maven-plugin.version}</version>
+                    <groupId>io.micronaut.maven</groupId>
+                    <artifactId>micronaut-maven-plugin</artifactId>
+                    <configuration>
+                        <classpathInference>false</classpathInference>
+                        <testResourcesDependencies>
+                            <dependency>
+                                <groupId>io.micronaut.testresources</groupId>
+                                <artifactId>micronaut-test-resources-jdbc-postgresql</artifactId>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                            </dependency>
+                        </testResourcesDependencies>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
 
         <plugins>
             <plugin>
-                <!-- Activate integration tests -->
-                <!-- This plugin is preconfigured in micronaut-base-parent so you only need to declare it -->
+                <!-- Activate integration tests (*IT.kt) -->
+                <!-- This plugin is preconfigured in micronaut-base-parent, so you only need to declare it -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
@@ -105,8 +138,7 @@
     </licenses>
     <scm>
         <connection>scm:git:git://github.com/archimedes-projects/archimedes-maven-micronaut-examples.git</connection>
-        <developerConnection>scm:git:ssh://github.com:archimedes-projects/archimedes-maven-micronaut-examples.git
-        </developerConnection>
+        <developerConnection>scm:git:ssh://github.com:archimedes-projects/archimedes-maven-micronaut-examples.git</developerConnection>
         <tag>main</tag>
         <url>https://github.com/archimedes-projects/archimedes-maven-micronaut-examples</url>
     </scm>

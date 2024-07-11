@@ -11,14 +11,6 @@
 
     <artifactId>micronaut-java-parent-example-domain</artifactId>
 
-    <properties>
-        <it.postgresql.image>postgres:14-alpine</it.postgresql.image>
-        <it.postgresql.host>localhost</it.postgresql.host>
-        <it.postgresql.port>5432</it.postgresql.port>
-        <it.postgresql.db>todo</it.postgresql.db>
-        <it.postgresql.password>ddbbpassword</it.postgresql.password>
-    </properties>
-
     <dependencies>
         <!-- Use Micronaut data to use @Transactional and JdbcOperations -->
         <dependency>
@@ -32,13 +24,18 @@
             <artifactId>micronaut-flyway</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
+        <!-- PostgreSQL data source driver and connection pool -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.micronaut.sql</groupId>
             <artifactId>micronaut-jdbc-hikari</artifactId>
@@ -49,46 +46,12 @@
     <build>
         <plugins>
             <plugin>
-                <!-- Run a dockerized PostgreSQL for integration tests -->
-                <!-- If you want to run PostgreSQL manually from the command line, you can use the command: -->
-                <!--     mvn io.fabric8:docker-maven-plugin:run -->
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
                 <configuration>
-                    <images>
-                        <image>
-                            <name>${it.postgresql.image}</name>
-                            <run>
-                                <ports>
-                                    <port>${it.postgresql.port}:5432</port>
-                                </ports>
-                                <env>
-                                    <POSTGRES_PASSWORD>${it.postgresql.password}</POSTGRES_PASSWORD>
-                                    <POSTGRES_DB>${it.postgresql.db}</POSTGRES_DB>
-                                </env>
-                                <wait>
-                                    <log>database system is ready to accept connections</log>
-                                </wait>
-                            </run>
-                        </image>
-                    </images>
+                    <!-- Needed because Micronaut plugin will try to make a shaded jar, but this module is just a simple library -->
+                    <skip>true</skip>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>start</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

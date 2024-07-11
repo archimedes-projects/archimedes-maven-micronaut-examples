@@ -10,9 +10,10 @@
     </parent>
 
     <artifactId>micronaut-kotlin-parent-example-rest</artifactId>
+    <packaging>${packaging}</packaging>
 
     <properties>
-        <exec.mainClass>Application</exec.mainClass>
+        <exec.mainClass>io.archimedesfw.maven.micronaut.example.todo.Application</exec.mainClass>
     </properties>
 
     <dependencies>
@@ -31,11 +32,6 @@
             <artifactId>micronaut-management</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.sql</groupId>
-            <artifactId>micronaut-jdbc-hikari</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>io.micronaut.security</groupId>
             <artifactId>micronaut-security-oauth2</artifactId>
         </dependency>
@@ -43,45 +39,17 @@
             <groupId>io.micronaut.security</groupId>
             <artifactId>micronaut-security-jwt</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-parameter-names</artifactId>
-        </dependency>
 
+        <dependency>
+            <groupId>io.micronaut.sql</groupId>
+            <artifactId>micronaut-jdbc-hikari</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <!-- Activate the ability to run module from Maven in the command lines with: -->
-                <!--     mvn exec:exec -->
-                <!-- Remember the database have to be available before to run (see domain module to run ddbb manually) -->
-                <!-- This plugin is preconfigured in micronaut-java-parent so you only need to declare it -->
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <!-- Activate the ability to generate a Docker image with command: -->
-                <!--     mvn jib:dockerBuild -->
-                <!-- This plugin is preconfigured in micronaut-java-parent so you only need to declare it -->
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <configuration>
-                    <to>
-                        <image>micronaut-java-parent-example-rest</image>
-                        <tags>
-                            <tag>${project.version}</tag>
-                        </tags>
-                    </to>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
